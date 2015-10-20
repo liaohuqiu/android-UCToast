@@ -68,7 +68,7 @@ public final class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_about) {
-            String url = "http://liaohuqiu.net";
+            String url = "https://github.com/liaohuqiu/android-UCToast";
             Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(myIntent);
             return true;
