@@ -1,3 +1,5 @@
+[![Android Gems](http://www.android-gems.com/badge/liaohuqiu/android-UCToast.svg?branch=master)](http://www.android-gems.com/lib/liaohuqiu/android-UCToast)
+
 UC 浏览器复制，无需权限提示悬浮窗实现
 
 ---
