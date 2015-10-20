@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">UCToast</string>
+    <string name="action_about">About</string>
+    <string name="tip">Here is the content from clipboard, click to view it:</string>
+    <string name="init_tip">Copy some text to clipboard, a view will be displayed at the top of the screen. Click it, the content will be displayed here.</string>
+</resources>
