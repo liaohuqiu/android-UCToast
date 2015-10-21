@@ -2,7 +2,7 @@
 
 UC 浏览器复制，无需权限提示悬浮窗实现
 
-About me:  [Github](https://github.com/liaohuqiu) | [twitter](https://twitter.com/liaohuqiu) | [微博](http://weibo.com/liaohuqiu)
+ABOUT ME / 关注我:  [Github](https://github.com/liaohuqiu) | [twitter](https://twitter.com/liaohuqiu) | [微博](http://weibo.com/liaohuqiu)
 
 ---
 
