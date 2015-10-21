@@ -1,26 +1,29 @@
 package in.srain.cube.demos.uctoast;
 
 import android.app.Service;
-import android.content.*;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.text.TextUtils;
 import android.view.*;
 import android.widget.TextView;
+import in.srain.cube.demos.uctoast.clipboard.ClipboardManagerCompat;
 
 public final class ListenClipboardService extends Service {
 
     private static final String KEY_FOR_WEAK_LOCK = "weak-lock";
     private static final String KEY_FOR_CMD = "cmd";
     private static final String KEY_FOR_CONTENT = "content";
-
     private static final String CMD_TEST = "test";
 
     private static CharSequence sLastContent = null;
+    private ClipboardManagerCompat mClipboardWatcher;
 
-    private ClipboardManager.OnPrimaryClipChangedListener mOnPrimaryClipChangedListener = new ClipboardManager.OnPrimaryClipChangedListener() {
+    private ClipboardManagerCompat.OnPrimaryClipChangedListener mOnPrimaryClipChangedListener = new ClipboardManagerCompat.OnPrimaryClipChangedListener() {
         public void onPrimaryClipChanged() {
             performClipboardCheck();
         }
@@ -33,9 +36,6 @@ public final class ListenClipboardService extends Service {
 
     /**
      * for dev
-     *
-     * @param context
-     * @param content
      */
     public static void startForTest(Context context, String content) {
 
@@ -59,13 +59,14 @@ public final class ListenClipboardService extends Service {
 
     @Override
     public void onCreate() {
-        ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).addPrimaryClipChangedListener(mOnPrimaryClipChangedListener);
+        mClipboardWatcher = ClipboardManagerCompat.create(this);
+        mClipboardWatcher.addPrimaryClipChangedListener(mOnPrimaryClipChangedListener);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).removePrimaryClipChangedListener(mOnPrimaryClipChangedListener);
+        mClipboardWatcher.removePrimaryClipChangedListener(mOnPrimaryClipChangedListener);
     }
 
     @Override
@@ -95,8 +96,7 @@ public final class ListenClipboardService extends Service {
     }
 
     private void performClipboardCheck() {
-        ClipboardManager cb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        CharSequence content = cb.getText();
+        CharSequence content = mClipboardWatcher.getText();
         if (TextUtils.isEmpty(content)) {
             return;
         }
@@ -147,7 +147,15 @@ public final class ListenClipboardService extends Service {
             int w = WindowManager.LayoutParams.MATCH_PARENT;
             int h = WindowManager.LayoutParams.MATCH_PARENT;
 
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(w, h, WindowManager.LayoutParams.TYPE_TOAST, 0, PixelFormat.TRANSLUCENT);
+            int flags = 0;
+            int type = 0;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                type = WindowManager.LayoutParams.TYPE_TOAST;
+            } else {
+                type = WindowManager.LayoutParams.TYPE_PHONE;
+            }
+
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(w, h, type, flags, PixelFormat.TRANSLUCENT);
             layoutParams.gravity = Gravity.TOP;
 
             mWindowManager.addView(mWholeView, layoutParams);
@@ -177,10 +185,6 @@ public final class ListenClipboardService extends Service {
 
         /**
          * touch the outside of the content view, remove the popped view
-         *
-         * @param v
-         * @param event
-         * @return
          */
         @Override
         public boolean onTouch(View v, MotionEvent event) {
