@@ -4,6 +4,8 @@ UC 浏览器复制，无需权限提示悬浮窗实现
 
 ABOUT ME / 关注我:  [Github](https://github.com/liaohuqiu) | [twitter](https://twitter.com/liaohuqiu) | [微博](http://weibo.com/liaohuqiu)
 
+更多的关于本项目，以及悬浮窗权限细节以及总结，请看[Android 悬浮窗的小结](http://liaohuqiu.net/cn/posts/android-windows-manager/)
+
 ---
 
 [睡不着起不来的万先生](http://weibo.com/2951317192) 的 [Android无需权限显示悬浮窗, 兼谈逆向分析app](http://www.jianshu.com/p/167fd5f47d5c) 文中提到，`type` 为 `WindowManager.LayoutParams.TYPE_TOAST` 的 `WindowManager.LayoutParam` 无需权限，即可让 View 显示。
