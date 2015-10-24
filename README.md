@@ -4,7 +4,11 @@ UC 浏览器复制，无需权限提示悬浮窗实现
 
 ABOUT ME / 关注我:  [Github](https://github.com/liaohuqiu) | [twitter](https://twitter.com/liaohuqiu) | [微博](http://weibo.com/liaohuqiu)
 
-更多的关于本项目，以及悬浮窗权限细节以及总结，请看[Android 悬浮窗的小结](http://liaohuqiu.net/cn/posts/android-windows-manager/)
+更多的关于本项目，以及悬浮窗权限细节以及总结，请看：
+
+*  [Android 悬浮窗的小结](http://liaohuqiu.net/cn/posts/android-windows-manager/)
+
+*  [睡不着起不来的万先生][] 的 [Android悬浮窗使用TYPE_TOAST的小结](http://www.jianshu.com/p/634cd056b90c)
 
 ---
 
@@ -31,3 +35,7 @@ ABOUT ME / 关注我:  [Github](https://github.com/liaohuqiu) | [twitter](https:
 
 
 <div><img src='https://raw.githubusercontent.com/liaohuqiu/android-UCToast/master/art/uc-toast.gif' width="300px" style='border: #f1f1f1 solid 1px'/></div>
+
+---
+
+[睡不着起不来的万先生]:        http://weibo.com/2951317192
