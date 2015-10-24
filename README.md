@@ -6,7 +6,7 @@ ABOUT ME / 关注我:  [Github](https://github.com/liaohuqiu) | [twitter](https:
 
 更多的关于本项目，以及悬浮窗权限细节以及总结，请看：
 
-*  [Android 悬浮窗的小结](http://liaohuqiu.net/cn/posts/android-windows-manager/)
+*  [廖祜秋liaohuqiu_秋百万][] 的 [Android 悬浮窗的小结](http://liaohuqiu.net/cn/posts/android-windows-manager/)
 
 *  [睡不着起不来的万先生][] 的 [Android悬浮窗使用TYPE_TOAST的小结](http://www.jianshu.com/p/634cd056b90c)
 
@@ -38,4 +38,5 @@ ABOUT ME / 关注我:  [Github](https://github.com/liaohuqiu) | [twitter](https:
 
 ---
 
+[廖祜秋liaohuqiu_秋百万]:      http://weibo.com/liaohuqiu
 [睡不着起不来的万先生]:        http://weibo.com/2951317192
