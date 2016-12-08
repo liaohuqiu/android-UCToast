@@ -53,8 +53,15 @@ final class TipViewController implements View.OnClickListener, View.OnTouchListe
 
         int flags = 0;
         int type = 0;
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            type = WindowManager.LayoutParams.TYPE_TOAST;
+            //解决Android 7.1.1起不能再用Toast的问题（先解决crash）
+            if(Build.VERSION.SDK_INT > 24){
+                type = WindowManager.LayoutParams.TYPE_PHONE;
+            }else{
+                type = WindowManager.LayoutParams.TYPE_TOAST;
+            }
         } else {
             type = WindowManager.LayoutParams.TYPE_PHONE;
         }
