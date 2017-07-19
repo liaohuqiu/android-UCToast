@@ -2,18 +2,21 @@ package in.srain.cube.demos.uctoast;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public final class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE_OVERLAY_PERMISSION = 0;
 
     private final static String KEY_CONTENT = "content";
     private TextView mTextView;
@@ -40,7 +43,36 @@ public final class MainActivity extends AppCompatActivity {
         Utils.printIntent("MainActivity::onCreate()", intent);
 
         tryToShowContent(intent);
-        ListenClipboardService.start(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.canDrawOverlays(this)) {
+                ListenClipboardService.start(this);
+            } else {
+                Intent requestIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(requestIntent, REQUEST_CODE_OVERLAY_PERMISSION);
+            }
+        } else {
+            //assume the permission was granted by default
+            ListenClipboardService.start(this);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_OVERLAY_PERMISSION:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Settings.canDrawOverlays(this)) {
+                        ListenClipboardService.start(this);
+                    } else {
+                        Toast.makeText(this,
+                                "android.permission.SYSTEM_ALERT_WINDOW was not granted, nothing will appear",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
